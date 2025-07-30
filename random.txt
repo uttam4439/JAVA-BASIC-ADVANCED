@@ -1,0 +1,8 @@
+JDBC :-
+Import packages
+Load Driver
+Register Driver
+Create Connection
+Create Statement
+Execute Statement
+close
