@@ -7,8 +7,6 @@ public class ExtendedTree{
         // Build the tree using PreOrder class logic
         PreOrder.BTree.index = -1;
         PreOrder.Node root = PreOrder.BTree.buildTree(nodes);
-
-
         System.out.println("Is Tree Balanced ?" +" "+ BalancedBinaryTree(root));
 
     }
