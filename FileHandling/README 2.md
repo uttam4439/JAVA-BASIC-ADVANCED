@@ -1,2 +1,0 @@
-# MyJavaCodes
-All Important Codes
