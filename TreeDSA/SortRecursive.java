@@ -17,4 +17,8 @@ public class SortRecursive{
         insert(arr,last);
     }
 
+    static void insert (ArrayList<Integer> arr , int value){
+
+    }
+
 }

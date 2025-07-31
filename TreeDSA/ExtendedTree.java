@@ -7,9 +7,9 @@ public class ExtendedTree{
         // Build the tree using PreOrder class logic
         PreOrder.BTree.index = -1;
         PreOrder.Node root = PreOrder.BTree.buildTree(nodes);
-
-
         System.out.println("Is Tree Balanced ?" +" "+ BalancedBinaryTree(root));
+
+        System.out.println("Tree in Inorder" + inOrder(root));
 
     }
 
@@ -27,5 +27,22 @@ public class ExtendedTree{
 
         if(Math.abs(lst-rst) > 1) return -1;
         return Math.max(lst,rst) + 1;
+    }
+
+    // How to save inorder , postorder , preorder
+    static ArrayList<Integer> inOrder(PreOrder.Node root){
+        ArrayList<Integer> gg = new ArrayList<>();
+
+        orderin(root,gg);
+        return gg;
+    }
+
+    private static void orderin(PreOrder.Node root , ArrayList<Integer> gg){
+        if(root == null){
+            return;
+        }
+        orderin(root.left , gg);
+        gg.add(root.data);
+        orderin(root.right, gg);
     }
 }

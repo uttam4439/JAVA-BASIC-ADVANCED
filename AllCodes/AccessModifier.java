@@ -4,7 +4,6 @@ public class AccessModifier {
     public static void main(String[] args) {
         int n = 10;
         AccessModifier cs = new AccessModifier();
-
         cs.call(n);
 
     //     Method m = AccessModifier.class.getDeclaredMethod("Sort", int.class);
