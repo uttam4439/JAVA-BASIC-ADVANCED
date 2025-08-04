@@ -14,6 +14,10 @@ public class RemoveSpaces {
         String g = "123";
         int n = Integer.parseInt(g);
         System.out.println(n);
+
+        String str = "Hello#Move#From#Word#to#Front#";
+        FrontHash(str);
+        
     }
 
     public static String Uppercase(String sentence){
@@ -64,5 +68,21 @@ public class RemoveSpaces {
             }
         }
         return max; */
+
+        public static void FrontHash(String str){
+            char[] c = str.toCharArray();
+
+            int k = c.length-1;
+
+            for(int i = k; i>=0; i--){
+                if(c[i] != '#'){
+                    char temp = c[i];
+                    c[i]=c[k];
+                    c[k] = temp;
+                    k--;
+                }
+            }
+            System.out.println(String.valueOf(c));
+        }
     }
 

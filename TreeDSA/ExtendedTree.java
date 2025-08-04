@@ -13,7 +13,9 @@ public class ExtendedTree{
         System.out.println("Tree in Inorder" + inOrder(root));
         System.out.println("Tree in PreOrder" + preOrder(root));
         System.out.println("Tree in LevelOrder");
-        level(root);    
+        level(root); 
+        System.out.println();
+        System.out.println("Is is odd Even tree" +" "+ OddEven(root));
         
 /* Ah! Now I understand your exact confusion. You’re asking why can’t I do this?:
 
@@ -92,16 +94,35 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
         orderpre(root.right, gg);
 
     }
+
+    static boolean OddEven(PreOrder.Node root){
+        if(root == null){
+            return true;
+        }
+        Queue<PreOrder.Node> gg = new LinkedList<>();
+        gg.add(root);
+        int level = 0;
+
+        while(!gg.isEmpty()){
+            int size = gg.size();
+            int prevVal = (level % 2 == 0) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            
+            for(int i = 0; i < size; i++){
+                PreOrder.Node kk = gg.poll();
+                int curr = kk.data;
+            
+            if(level % 2 == 0){
+                if(curr % 2 == 0 || prevVal >= curr) return false;
+            }
+            else{
+                if(curr % 2 != 0 || prevVal <= curr) return false;
+            }
+            prevVal = curr;
+            if(kk.left != null) gg.offer(kk.left);
+            if(kk.right != null) gg.offer(kk.left);
+        }
+        level++;
+    }
+        return true;
+    }
 }
-
-    // static boolean OddEven(PreOrder.Node root){
-    //     if(root == null){
-    //         return true;
-    //     }
-    //     Queue<PreOrder.Node> gg = new LinkedList<>();
-    //     gg.add(root);
-
-    //     int level = 0;
-        
-    // }
-
