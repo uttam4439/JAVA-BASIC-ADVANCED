@@ -12,10 +12,15 @@ public class ExtendedTree{
 
         System.out.println("Tree in Inorder" + inOrder(root));
         System.out.println("Tree in PreOrder" + preOrder(root));
+        System.out.println("Is this odd Even tree" +"->"+ OddEven(root));
+
+        System.out.println("Has Path Sum" + hasPathSum(root, 6 ));
+
+        System.out.println("After Puring The tree is" +"->"+treePuring(root));
+
         System.out.println("Tree in LevelOrder");
         level(root); 
         System.out.println();
-        System.out.println("Is is odd Even tree" +" "+ OddEven(root));
         
 /* Ah! Now I understand your exact confusion. You’re asking why can’t I do this?:
 
@@ -29,6 +34,7 @@ System.out.println("Tree in LevelOrder: " + level(root));
 the expression inside println expects both sides of + to be values that can be converted to Strings.
 
 But since level(root) is void, it has no return value to concatenate with "Tree in LevelOrder: ". */
+
 
     }
     public static void level(PreOrder.Node root){
@@ -124,5 +130,31 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
         level++;
     }
         return true;
+    }
+
+    public static boolean hasPathSum(PreOrder.Node root , int targetSum){
+        if(root == null) return false;
+
+        if(root.left == null && root.right == null){
+            return root.data == targetSum;
+        }
+
+        int remainingSum = targetSum - root.data;
+        
+        return hasPathSum(root.left , remainingSum) || hasPathSum(root.right, remainingSum);
+    }
+
+    public static PreOrder.Node treePuring(PreOrder.Node root){
+        //sub tree which only contains 0 with decendant
+        
+        if(root == null) return null;
+
+        root.left = treePuring(root.left);
+        root.right = treePuring(root.right);
+
+        if(root.data == 0 && root.left == null || root.right == null){
+            return null;
+        }
+        return root;
     }
 }
