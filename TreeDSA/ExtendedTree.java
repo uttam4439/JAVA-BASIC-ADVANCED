@@ -14,9 +14,13 @@ public class ExtendedTree{
         System.out.println("Tree in PreOrder" + preOrder(root));
         System.out.println("Is this odd Even tree" +"->"+ OddEven(root));
 
-        System.out.println("Has Path Sum" + hasPathSum(root, 6 ));
+        System.out.println("Has Path Sum" + "->"+ hasPathSum(root, 7 ));
 
+    /* Ye tree ko puring kr de raha so tree utni hi bachi aage ke trave utne hi tree pr ho gya */
         System.out.println("After Puring The tree is" +"->"+treePuring(root));
+
+        System.out.println("Tree in LevelOrder");
+        System.out.println(level2(root)); 
 
         System.out.println("Tree in LevelOrder");
         level(root); 
@@ -38,6 +42,7 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
 
     }
     public static void level(PreOrder.Node root){
+        if(root == null) return;
         Queue<PreOrder.Node> gg = new LinkedList<>();
         gg.offer(root);
         
@@ -53,6 +58,33 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
             }
         }
     }
+
+    public static List<Integer> level2(PreOrder.Node root){
+        List<Integer> ll = new ArrayList<>();
+        if(root == null) return ll;
+
+        Queue<PreOrder.Node> gg = new LinkedList<>();
+        gg.offer(root);
+        
+        while(!gg.isEmpty()){
+            int size = gg.size();
+
+            for(int i = 0; i<size; i++){
+            PreOrder.Node kk = gg.poll();
+
+            ll.add(kk.data);
+
+            if(kk.left != null){
+                gg.offer(kk.left);
+            }
+            if(kk.right != null){
+                gg.offer(kk.right);
+            }
+        }
+        }
+        return ll;
+    }
+
     public static boolean BalancedBinaryTree(PreOrder.Node root){
         return balance(root) != -1;
     }

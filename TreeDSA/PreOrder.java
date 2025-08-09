@@ -13,7 +13,7 @@ public class PreOrder{
         }
     }
 
-    static class BTree{
+    public static class BTree{
         static int index = -1;
         public static Node buildTree(int[] nodes) {
             index++;
@@ -26,6 +26,7 @@ public class PreOrder{
 
             return newNode;
         }
+        
     }
 
     static void PreorderT(Node root){
