@@ -1,8 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.*;
 public class ExtendedTree{
     public static void main(String args[]){
-        PreOrder gg = new PreOrder();
         
         int[] nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6};
         // Build the tree using PreOrder class logic
@@ -188,5 +186,29 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
             return null;
         }
         return root;
+    }
+
+    public static boolean isSubtree(PreOrder.Node root , PreOrder.Node subtree){
+        if(subtree == null) return true;
+        if(root == null) return false;
+
+        if(root.data == subtree.data){
+            if(isSame(root, subtree)){
+                return true;
+            }
+        }
+        return isSubtree(root.left, subtree) || isSubtree(root.right, subtree);
+    }
+
+    private static boolean isSame(PreOrder.Node root , PreOrder.Node subtree){
+        if(root == null && subtree == null) return true;
+
+        //Base Cond. -> koi ek null raha to subtree nhi hoga
+        if(root == null || subtree == null) return false;
+
+        if(root.data == subtree.data){
+            return(isSame(root.left, subtree.left ) && isSame(root.right, subtree.right));
+        }
+        return false;
     }
 }
