@@ -34,11 +34,11 @@ public class CountingSort {
         }
         return ans;
     }
+
     public void call(String srr){
         String s = Sort(srr);
         System.out.println("Counting String Sort" + " " + s);
     }
-
     private static String Sort(String srr){
         int count[] = new int[26];
 

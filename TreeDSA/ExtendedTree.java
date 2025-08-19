@@ -14,6 +14,10 @@ public class ExtendedTree{
 
         System.out.println("Has Path Sum" + "->"+ hasPathSum(root, 7 ));
 
+        //isCousins
+        int x = 3, y = 4;
+        System.out.println("Values are Cousins" + "->" + ExtendedTree.isCousins(root , x ,y));
+
     /* Ye tree ko puring kr de raha so tree utni hi bachi aage ke trave utne hi tree pr ho gya */
         System.out.println("After Puring The tree is" +"->"+treePuring(root));
 
@@ -208,6 +212,42 @@ But since level(root) is void, it has no return value to concatenate with "Tree 
 
         if(root.data == subtree.data){
             return(isSame(root.left, subtree.left ) && isSame(root.right, subtree.right));
+        }
+        return false;
+    }
+
+    public static boolean isCousins(PreOrder.Node root , int x , int y){
+        if(root == null) return false;
+
+        Queue<PreOrder.Node> gg = new LinkedList<>();
+        gg.offer(root);
+
+        while(!gg.isEmpty()){
+            int size = gg.size();
+            boolean foundx = false;
+            boolean foundy = false;
+
+            for(int i = 0; i<size; i++){
+                PreOrder.Node curr = gg.poll();
+
+                if(curr.left != null && curr.right != null){
+                    if((curr.left.data == x && curr.right.data == y) || (curr.left.data == y && curr.right.data == x)){
+                        return false;
+                    }
+                }
+                if(curr.left != null){
+                    gg.offer(curr.left);
+                    if(curr.left.data == x) foundx = true;
+                    if(curr.left.data == y) foundy = true;
+                }
+                if(curr.right != null){
+                    gg.offer(curr.right);
+                    if(curr.right.data == x) foundx = true;
+                    if(curr.right.data == y) foundy = true;
+                }
+            }
+            if(foundx && foundy) return true;
+            if(foundx || foundy) return false;
         }
         return false;
     }
