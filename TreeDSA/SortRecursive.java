@@ -11,6 +11,9 @@ public class SortRecursive{
         System.out.println(gg);
         sortStack(gg);
         System.out.println("Sorted Stack" + gg);
+
+        removeMiddle(gg);
+        System.out.println(gg);
     }
 
     public static void sort(ArrayList<Integer> list){
@@ -59,4 +62,22 @@ public class SortRecursive{
         gg.push(top);
     }
 
+    public static void removeMiddle(Stack<Integer> gg){
+        if(gg.isEmpty()) return;
+
+        int k = (gg.size() / 2) + 1;
+
+        insertStack2(gg, k);
+    }
+    static void insertStack2(Stack<Integer> gg , int k){
+        if(k == 1){
+            gg.pop();
+            return;
+        }
+
+        int top = gg.pop();
+        insertStack2(gg, k-1);
+
+        gg.push(top);
+    }
     }
