@@ -15,6 +15,9 @@ public class ExtendedTree {
 
         System.out.println("Has Path Sum" + "->" + hasPathSum(root, 7));
 
+        // right view
+        System.out.println("Right view Of a Tree" + ExtendedTree.rightView(root));
+
         // isCousins
         int x = 3, y = 4;
         System.out.println("Values are Cousins" + "->" + ExtendedTree.isCousins(root, x, y));
@@ -287,7 +290,27 @@ public class ExtendedTree {
         return false;
     }
 
-    public List<Integer> rightView(PreOrder.Node root) {
+    public static List<Integer> rightView(PreOrder.Node root) {
+        List<Integer>  gg = new ArrayList<>();
+        if(root == null) return gg;
 
+        Queue<PreOrder.Node> kk = new LinkedList<>();
+        kk.offer(root);
+
+        while(!kk.isEmpty()){
+            int size = kk.size();
+            PreOrder.Node lastnode = null; 
+
+            for(int i =0; i<size; i++){
+                PreOrder.Node curr = kk.poll();
+
+                lastnode = curr;
+
+                if(curr.left != null) kk.offer(curr.left);
+                if(curr.right != null) kk.offer(curr.right);
+            }
+            gg.add(lastnode.data);
+        } 
+        return gg;
     }
 }

@@ -72,18 +72,71 @@ public class AdjacencyList{
         }
     }
 
-
-    public static void dfs(ArrayList<Edge> graph[] , int curr ,boolean vis[]){ // vis is use to dont cycle
-        System.out.println(curr + " ");
-        vis[curr] = true;
+    public static void dfs(ArrayList<Edge> graph[] , int curr ,boolean visdfs[]){ // vis is use to dont cycle
+        System.out.print(curr + " ");
+        visdfs[curr] = true;
 
         for(int i = 0; i<graph[curr].size(); i++){
             Edge e = graph[curr].get(i);
-            if(vis[curr] == false){
-                dfs(graph, e.dest, vis);
+            if(!visdfs[e.dest]){
+                dfs(graph, e.dest, visdfs);
             }
         }
     }
+
+    public static void dfs2(ArrayList<Edge> graph[] , int curr ,boolean visdfs2[]){ 
+        System.out.print(curr + " ");
+        visdfs2[curr] = true;
+
+        for(int i = 0; i<graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            if(!visdfs2[e.dest]){
+                dfs(graph, e.dest, visdfs2);
+            }
+        }
+    }
+
+    //O(V^V)
+    public static void AllPath(ArrayList<Edge> graph[], boolean visi[] ,int curr, String path , int target){
+        // Base case: if we reached the target, print the path and stop recursion
+        if(curr == target){
+        System.out.println(path);
+        return;
+        }
+        // Explore all neighbors of the current node
+        for(int i = 0; i<graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            // If neighbor is not visited, we can go there
+            if(!visi[e.dest]){
+                visi[curr] = true;
+
+                // Recursive call: go deeper to destination node
+                // Add `e.dest` to path string
+                AllPath(graph, visi, e.dest, path+e.dest, target);
+
+                // Backtrack: unmark current node as visited 
+                // (so it can be used in other possible paths)
+                visi[curr] = false;
+            }
+        }
+}
+/* Outside-loop marking makes it robust. It works for any graph (with cycles, multiple branches, etc.).
+
+public static void AllPath(ArrayList<Edge> graph[], boolean visi[] ,int curr, String path , int target){
+        if(curr == target){
+        System.out.println(path);
+        return;
+        }
+        visi[curr] = true;
+       
+        for(int i = 0; i<graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            if(!visi[e.dest]){
+                AllPath(graph, visi, e.dest, path+e.dest, target);
+            }
+        }
+            visi[curr] = false;
+} */
 
     static class WeightEdge{
         int src;
@@ -118,10 +171,32 @@ public class AdjacencyList{
     public static void main(String[] args){
         int v = 4;
         ArrayList<Edge> graph[] = new ArrayList[v];
+        System.out.println("Graph (Adjacency List):");
         CreateGraph(graph);
 
+        // Print unweighted graph adjacency list
+        for(int i = 0; i < v; i++){
+            System.out.print(i + " -> ");
+            for(Edge e : graph[i]){
+                System.out.print(e.dest + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+
         ArrayList<WeightEdge> network[] = new ArrayList[v];
+        System.out.println("Weighted Graph (Adjacency List):");
         WeightedGraph(network);
+    
+        // Print weighted graph adjacency list
+        for(int i = 0; i < v; i++){
+            System.out.print(i + " -> ");
+            for(WeightEdge w : network[i]){
+                System.out.print("(" + w.dest + ", w=" + w.weight + ") ");
+            }
+            System.out.println();
+        }
+        System.out.println();
 
         for(int i = 0; i<graph[2].size(); i++){
             Edge e = graph[2].get(i);
@@ -133,25 +208,40 @@ public class AdjacencyList{
             WeightEdge w = network[3].get(i);
             System.out.println(w.src + " " + w.dest + " " + w.weight + " ");
         }
-        System.out.println();
-
+        System.out.print("BFS Traversal (from 0): ");
         bfs(graph, v);
         System.out.println();
 
+
         // it is required in main method when diconnected graph BFS
+        System.out.print("BFS Traversal (Disconnected Graph): ");
         boolean vis[] = new boolean[v];
         for(int i = 0; i<v; i++){
             if(vis[i] == false){
                 bfs(graph, v, vis, i);
             }
         }
+        System.out.println();
 
-        dfs(graph, 0, vis);
+        System.out.print("DFS Traversal (from 0): ");
+        boolean visdfs[] = new boolean[v];
+        dfs(graph, 0, visdfs);
+        System.out.println();
+
         // it is required in main method when diconnected graph DFS
+        System.out.print("DFS Traversal (Disconnected Graph): ");
+        boolean visdfs2[] = new boolean[v];
         for(int i = 0; i<v; i++){
-            if(vis[i] == false){
-                dfs(graph, i, vis);
+            if(visdfs2[i] == false){
+                dfs2(graph, i, visdfs2);
             }
         }
+        System.out.println();
+
+        //print all path
+        System.out.println("All Paths from 0 to 1:");
+        boolean visi[] = new boolean[v];
+        int src = 0; int target = 1;
+        AllPath(graph, visi, src, "0", target);
     }
 }
