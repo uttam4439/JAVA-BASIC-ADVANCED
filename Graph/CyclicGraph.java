@@ -49,7 +49,21 @@ public class CyclicGraph{
         ArrayList<DirectedEdge> graph[] = new ArrayList[V]; 
         directedGraph(graph);
 
+        // if dircted graph has component then way to find at least 1 cycle
+        boolean[] vis = new boolean[V];
+        boolean[] rec = new boolean[V];
 
+        for(int i = 0; i<V; i++){
+            if(!vis[i]){
+                boolean iscycle = isCyclic(graph, vis, 0, rec);
+                if(iscycle){
+                    System.out.println(iscycle);
+                    break;
+                }
+            }
+        }
+
+        // only when all components are in 1
         System.out.println(isCyclic(graph, new boolean[V], 0, new boolean[V]));
     }
 }
