@@ -183,7 +183,7 @@ public class ExtendedTree {
                 if (kk.left != null)
                     gg.offer(kk.left);
                 if (kk.right != null)
-                    gg.offer(kk.left);
+                    gg.offer(kk.right);
             }
             level++;
         }
