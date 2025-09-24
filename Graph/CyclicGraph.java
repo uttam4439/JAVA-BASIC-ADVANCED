@@ -1,8 +1,6 @@
 package Graph;
 import java.util.*;
 
-import Graph.AdjacencyList.Edge;
-
 public class CyclicGraph{
     static class DirectedEdge{
         int src;
