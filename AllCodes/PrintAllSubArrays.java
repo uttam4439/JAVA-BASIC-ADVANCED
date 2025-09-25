@@ -15,7 +15,9 @@ public class PrintAllSubArrays{
             System.out.println();
         }
        }
-       System.out.println(subarrayExist(11, arr));
+       System.out.println(subarrayExist(9, arr));
+       System.out.println(subarrayExist2(22, arr));
+       System.out.println(firstsubArray(arr, 16));
     }
     public static boolean subarrayExist(int k , int[] arr){
         HashMap<Integer , Integer> gg = new HashMap<>();
@@ -25,12 +27,53 @@ public class PrintAllSubArrays{
         
         for(int i : arr){
             sum += i;
-
+     // Check if (sum - k) exists in the map
             if(gg.containsKey(sum - k)){
                 return true;
             }
             gg.put(sum,gg.getOrDefault(sum, 0)+1);
         }
         return false;
+    }
+
+    public static boolean subarrayExist2(int k, int[] arr){
+        HashSet<Integer> gg = new HashSet<>();
+        gg.add(0); // Initialize with sum 0
+
+        int sum = 0;
+        for(int i : arr){
+            sum += i;
+
+            if(gg.contains(sum-k)){
+                return true;
+            }
+            gg.add(sum);
+        }
+        return false;
+    }
+
+    public static ArrayList<Integer> firstsubArray(int[] arr , int k){
+        ArrayList<Integer> gg = new ArrayList<>();
+        gg.add(-1);
+
+        HashMap<Integer,Integer> kk = new HashMap<>();
+        kk.put(0,-1);
+
+        int sum = 0;
+        for(int i =0; i<arr.length; i++){
+            sum += arr[i];
+
+            int rem = sum - k;
+            if(kk.containsKey(rem)){
+                int start = kk.get(rem)+1;
+                gg.set(0,start);
+                gg.add(i);
+                return gg;
+            }
+            if(!kk.containsKey(sum)){
+                kk.put(sum,i);
+            }
+        }
+        return gg;
     }
 }
