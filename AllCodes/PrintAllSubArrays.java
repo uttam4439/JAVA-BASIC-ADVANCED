@@ -18,6 +18,7 @@ public class PrintAllSubArrays{
        System.out.println(subarrayExist(9, arr));
        System.out.println(subarrayExist2(22, arr));
        System.out.println(firstsubArray(arr, 16));
+       System.out.println(longestSubarray(new int[]{2,4,6,8,4}, 12));
     }
     public static boolean subarrayExist(int k , int[] arr){
         HashMap<Integer , Integer> gg = new HashMap<>();
@@ -52,6 +53,8 @@ public class PrintAllSubArrays{
         return false;
     }
 
+    // When We Want longest subarrays we don't update index to the curr index in map while vice versa for smallest
+
     public static ArrayList<Integer> firstsubArray(int[] arr , int k){
         ArrayList<Integer> gg = new ArrayList<>();
         gg.add(-1);
@@ -76,4 +79,29 @@ public class PrintAllSubArrays{
         }
         return gg;
     }
+
+    public static int longestSubarray(int[] arr, int k) {
+       
+        int max = 0;
+        
+        HashMap<Integer,Integer> gg = new HashMap<>();
+        gg.put(0,-1);
+        
+        int sum = 0;
+        for(int i = 0; i<arr.length; i++){
+            sum += arr[i];
+            
+            int rem = sum - k;
+            if(gg.containsKey(rem)){
+                int len = i - gg.get(rem);
+                max = Math.max(len,max);
+            }
+            if(!gg.containsKey(sum)){
+                gg.put(sum,i);
+            }
+        }
+        return max;
+     }
+
+     
 }
