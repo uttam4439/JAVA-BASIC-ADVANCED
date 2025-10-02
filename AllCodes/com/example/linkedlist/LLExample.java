@@ -154,7 +154,7 @@ public class LLExample { // Singly Linked List
         int index = 0;
         while(current.next != null){
             if(current.data == data){
-                System.out.println(index);;
+                System.out.println(index);
             }
             current = current.next;
             index++;
