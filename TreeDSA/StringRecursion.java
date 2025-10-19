@@ -1,6 +1,6 @@
 import java.util.*;
 
-class StringRecursion{
+public class StringRecursion{
     
     public static void main(String[] args){
         String input = "abc";  
@@ -33,7 +33,7 @@ class StringRecursion{
         }
         char ch = in.charAt(0);
         String rem = in.substring(1);
-        
+
         if(Character.isAlphabetic(ch)){
 
             permutationWithDigit(rem, out+Character.toLowerCase(ch), kk);
