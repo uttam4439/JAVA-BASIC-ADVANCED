@@ -24,6 +24,7 @@ public class Subsets{
         // start with first char fixed
         String output = s.substring(0,1);
         permutationSpace(s.substring(1), output, pp);
+        // s.substring(1) means it is a built in function use to give substring starting from 1
 
         System.out.println(pp);
         
@@ -87,6 +88,5 @@ public class Subsets{
         permutationSpace(rem, output+" "+ch, pp);
         permutationSpace(rem, output+ch, pp);
     }
-
 }
 
