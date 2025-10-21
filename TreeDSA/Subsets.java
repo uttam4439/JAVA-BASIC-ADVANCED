@@ -89,11 +89,5 @@ public class Subsets{
         permutationSpace(rem, output+ch, pp);
     }
 
-    public static void allCombination(String s,String out, List<String> gg){
-        if(s.length() == 0){
-            gg.add(out);
-            return;
-        }
-    }
 }
 

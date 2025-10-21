@@ -44,4 +44,8 @@ public class StringRecursion{
         }
     }
 
+    public static void allCombinations(char[] arr, int index , ArrayList<String> oo){
+        // given string change it into char array
+    }
+
 }

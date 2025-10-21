@@ -20,6 +20,20 @@ class NumberRecursion{
         subsetsWithDuplicate(arr, 0, ll, pp);
         System.out.println(pp);
 
+        int[] array = {1,2,3};
+        List<List<Integer>> res = new ArrayList<>();
+
+        allCombinations(array, 0, res);
+
+        System.out.println(res);
+
+        int[] array1 = {1,2,2};
+        List<List<Integer>> res1 = new ArrayList<>();
+
+        allCombinationsDuplicate(array1, 0, res1);
+
+        System.out.println(res1);
+
     }
 
     public static void subsetsWithoutDuplicate(int[] nums , int index , List<Integer> gg,List<List<Integer>> kk){
@@ -45,5 +59,56 @@ class NumberRecursion{
             subsetsWithDuplicate(arr, i+1, ll, pp);
             ll.remove(ll.size()-1);
         }
+    }
+
+    public static void allCombinations(int[] array , int index , List<List<Integer>> res){
+        if(index == array.length){
+            List<Integer> temp = new ArrayList<>();
+            for (int num : array){
+            temp.add(num);
+            }
+            res.add(temp);
+            return;
+        }
+
+        for(int i = index; i<array.length; i++){
+
+            swap(array ,index, i);
+            allCombinations(array, index+1, res);
+            swap(array ,index, i);
+        }
+    }
+
+    public static void swap(int array[] ,int i , int j){
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+    public static void allCombinationsDuplicate(int[] array1 , int index , List<List<Integer>> res1){
+        if(index == array1.length){
+            List<Integer> temp = new ArrayList<>();
+            for (int num : array1){
+            temp.add(num);
+            }
+            res1.add(temp);
+            return;
+        }
+        HashSet<Integer> used = new HashSet<>();
+        for(int i = index; i<array1.length; i++){
+            if(used.contains(array1[i])){
+                continue;
+            }else{
+                used.add(array1[i]);
+            }
+            swap1(array1 ,index, i);
+            allCombinationsDuplicate(array1, index+1, res1);
+            swap1(array1 ,index, i);
+        }
+    }
+    public static void swap1(int array1[] ,int i , int j){
+        int temp = array1[i];
+        array1[i] = array1[j];
+        array1[j] = temp;
     }
 }
