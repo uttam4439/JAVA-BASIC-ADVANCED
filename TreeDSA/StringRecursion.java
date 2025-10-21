@@ -12,6 +12,14 @@ public class StringRecursion{
         List<String> kk = new ArrayList<>();
         permutationWithDigit(in, " ", kk);
         System.out.println(kk);
+
+        String s = "ABC";
+        ArrayList<String> oo = new ArrayList<>();
+        char[] arr = s.toCharArray();
+        Arrays.sort(arr);
+
+        allCombinations(arr, 0, oo);
+        System.out.println(oo);;
     }
 
     public static void letterCasePermutation(String input , String output , List<String> gg){
@@ -45,7 +53,30 @@ public class StringRecursion{
     }
 
     public static void allCombinations(char[] arr, int index , ArrayList<String> oo){
-        // given string change it into char array
+        // given string change it into char array // handled duplicates
+        if(index == arr.length){
+            oo.add(new String(arr));
+            return;
+        }
+
+        HashSet<Character> used = new HashSet<>();
+        for(int i = index; i<arr.length; i++){
+            if(used.contains(arr[i])){
+                continue;
+            }else{
+                used.add(arr[i]);
+            }
+
+            swap(arr, index , i);
+            allCombinations(arr, index+1, oo);
+            swap(arr , index , i);
+        }
+    }
+
+    public static void swap(char[] arr, int i , int j){
+        char ch = arr[i];
+        arr[i] = arr[j];
+        arr[j] = ch;
     }
 
 }

@@ -29,7 +29,7 @@ class NumberRecursion{
 
         int[] array1 = {1,2,2};
         List<List<Integer>> res1 = new ArrayList<>();
-
+        Arrays.sort(array1);
         allCombinationsDuplicate(array1, 0, res1);
 
         System.out.println(res1);
