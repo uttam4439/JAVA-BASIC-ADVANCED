@@ -19,7 +19,13 @@ public class StringRecursion{
         Arrays.sort(arr);
 
         allCombinations(arr, 0, oo);
-        System.out.println(oo);;
+        System.out.println(oo);
+
+        int n = 1234;
+        String x = Integer.toString(n);
+        
+        int y = helper(x,0);
+        System.out.println(y);
     }
 
     public static void letterCasePermutation(String input , String output , List<String> gg){
@@ -77,6 +83,21 @@ public class StringRecursion{
         char ch = arr[i];
         arr[i] = arr[j];
         arr[j] = ch;
+    }
+
+    public static int helper(String x , int ans){
+        if(x.length() == 0){
+            return ans;
+        }
+        
+        char ch = x.charAt(0);
+        String rem = x.substring(1);
+        
+        if(Character.isDigit(ch)){
+            ans = ans+(ch -'0');
+        }
+        
+        return helper(rem,ans);
     }
 
 }

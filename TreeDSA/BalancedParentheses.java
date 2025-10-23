@@ -44,5 +44,5 @@ class BalancedParentheses{
             solver(open , close-1, output+")", kk);
 
         }
-    }
+    } 
 }
