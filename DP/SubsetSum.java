@@ -1,23 +1,26 @@
 package DP;
 class SubsetSum{
     public static void main(String[] args){
-        int arr[] = {2,3,7,10};
+        int arr[] = {2,3,7,1,10};
         int sum = 11;
         int n = arr.length;
 
         System.out.println(isSubset(arr, n, sum));
+        System.out.println(isSubsetRecursive(arr, n, sum)); 
+
+        // Memoization left
 
     }
 
-    public static boolean isSubset(int[] arr, int n , int sum){
+    public static boolean isSubset(int[] arr, int n , int sum){ // Bootom up approach
         boolean[][] t = new boolean[n+1][sum+1];
         for(int i = 0; i<n+1; i++){
             for(int j = 0; j<sum+1; j++){
                 if(i==0){
-                    t[i][j] = false;
+                    t[i][j] = false;  // no. of element 0 hai or sum > 0 koi option nahi hai  
                 }
                 if(j == 0){
-                    t[i][j] = true;
+                    t[i][j] = true; // sum 0 ho or kitne bhi element le lo empty subset to hai
                 }
             }
         }
@@ -32,5 +35,17 @@ class SubsetSum{
             }
         }
         return t[n][sum];
+    }
+
+    public static boolean isSubsetRecursive(int[] arr, int n , int sum){
+
+        if(sum == 0) return true; // sum pahle aaya if wo mil jaye n khatam hone se pahle
+        if(n == 0) return false;
+
+        if(arr[n-1] > sum){
+            return isSubsetRecursive(arr, n-1, sum);
+        }
+
+        return isSubsetRecursive(arr, n-1, sum) || isSubsetRecursive(arr, n-1, sum-arr[n-1]);
     }
 }
