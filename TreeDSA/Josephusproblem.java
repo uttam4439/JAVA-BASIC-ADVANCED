@@ -15,7 +15,7 @@ class Josephusproblem{
 
     }
 
-    public static int survived(ArrayList<Integer> gg , int index , int k ){
+    public static int survived(ArrayList<Integer> gg , int index , int k){
         if(gg.size() == 1){
             return gg.get(0);
             
