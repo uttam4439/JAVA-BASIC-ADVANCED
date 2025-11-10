@@ -75,4 +75,9 @@ class SubsetSum{
         }
         return t[n][target];
     }
+
+    public static int totalSubsethavingMinDiff(int[] nums , int diff , int x){
+        // problem is same as Target Sum  
+        // but handle negative sum and 0 in array
+    }
 }
